@@ -1,0 +1,30 @@
+ 
+<html>
+        
+<head>
+        <title>Register</title>
+                <meta charset="utf-8">
+                <link href="css/style.css" rel='stylesheet' type='text/css' />
+                <link href='http://fonts.googleapis.com/css?family=Open+Sans:600italic,400,300,600,700' rel='stylesheet' type='text/css'>
+</head>
+<body>
+  <div id="logindiv" class="login-form">
+                                        
+                <form name="loginform" method="post" action="/register">
+                    <li>
+                        <input type="text" class="text" value="USERNAME" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'USERNAME';}" id="name" name="name"><a href="#" class=" icon user"></a>
+                    </li>
+                    <li>
+                        <input type="password" value="Password" onfocus="this.value = '';" onblur="if (this.value == '') {this.value = 'Password';}" id="password" name="password"><a href="#" class=" icon lock"></a>
+                    </li>
+                    <br/><br/>
+                    
+                    <div class="mybutton">
+                         <input type="submit" name="submit" value="Register">
+                        <div class="clear"> </div>
+                    </div>
+                                    
+                </form>
+    </div>
+    </body>
+    </html>

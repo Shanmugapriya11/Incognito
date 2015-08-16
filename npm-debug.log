@@ -1,0 +1,195 @@
+0 info it worked if it ends with ok
+1 verbose cli [ 'node', '/usr/local/bin/npm', 'install', 'ejs', '2.3.1' ]
+2 info using npm@1.4.28
+3 info using node@v0.10.33
+4 warn package.json Untitled-Chat@0.0.1 No description
+5 warn package.json Untitled-Chat@0.0.1 No repository field.
+6 warn package.json path@0.11.14 path is also the name of a node core module.
+7 verbose readDependencies using package.json deps
+8 verbose cache add [ 'ejs@~0.8.5', null ]
+9 verbose cache add name=undefined spec="ejs@~0.8.5" args=["ejs@~0.8.5",null]
+10 verbose parsed url { protocol: null,
+10 verbose parsed url   slashes: null,
+10 verbose parsed url   auth: null,
+10 verbose parsed url   host: null,
+10 verbose parsed url   port: null,
+10 verbose parsed url   hostname: null,
+10 verbose parsed url   hash: null,
+10 verbose parsed url   search: null,
+10 verbose parsed url   query: null,
+10 verbose parsed url   pathname: 'ejs@~0.8.5',
+10 verbose parsed url   path: 'ejs@~0.8.5',
+10 verbose parsed url   href: 'ejs@~0.8.5' }
+11 verbose cache add [ '2.3.1', null ]
+12 verbose cache add name=undefined spec="2.3.1" args=["2.3.1",null]
+13 verbose parsed url { protocol: null,
+13 verbose parsed url   slashes: null,
+13 verbose parsed url   auth: null,
+13 verbose parsed url   host: null,
+13 verbose parsed url   port: null,
+13 verbose parsed url   hostname: null,
+13 verbose parsed url   hash: null,
+13 verbose parsed url   search: null,
+13 verbose parsed url   query: null,
+13 verbose parsed url   pathname: '2.3.1',
+13 verbose parsed url   path: '2.3.1',
+13 verbose parsed url   href: '2.3.1' }
+14 verbose cache add name="ejs" spec="~0.8.5" args=["ejs","~0.8.5"]
+15 verbose parsed url { protocol: null,
+15 verbose parsed url   slashes: null,
+15 verbose parsed url   auth: null,
+15 verbose parsed url   host: null,
+15 verbose parsed url   port: null,
+15 verbose parsed url   hostname: null,
+15 verbose parsed url   hash: null,
+15 verbose parsed url   search: null,
+15 verbose parsed url   query: null,
+15 verbose parsed url   pathname: '~0.8.5',
+15 verbose parsed url   path: '~0.8.5',
+15 verbose parsed url   href: '~0.8.5' }
+16 verbose addNamed [ 'ejs', '~0.8.5' ]
+17 verbose addNamed [ null, '>=0.8.5-0 <0.9.0-0' ]
+18 silly lockFile 05610aaa-ejs-0-8-5 ejs@~0.8.5
+19 verbose lock ejs@~0.8.5 /Users/user/.npm/05610aaa-ejs-0-8-5.lock
+20 silly lockFile 01b1c534-2-3-1 2.3.1
+21 verbose lock 2.3.1 /Users/user/.npm/01b1c534-2-3-1.lock
+22 silly addNameRange { name: 'ejs', range: '>=0.8.5-0 <0.9.0-0', hasData: false }
+23 silly lockFile 01b1c534-2-3-1 2.3.1
+24 silly lockFile 01b1c534-2-3-1 2.3.1
+25 verbose addNamed [ '2.3.1', '' ]
+26 verbose addNamed [ null, '*' ]
+27 silly lockFile b28e73c6-2-3-1 2.3.1@
+28 verbose lock 2.3.1@ /Users/user/.npm/b28e73c6-2-3-1.lock
+29 verbose request where is /ejs
+30 verbose request registry https://registry.npmjs.org/
+31 verbose request id a2d642576be00cf1
+32 verbose url raw /ejs
+33 verbose url resolving [ 'https://registry.npmjs.org/', './ejs' ]
+34 verbose url resolved https://registry.npmjs.org/ejs
+35 verbose request where is https://registry.npmjs.org/ejs
+36 info trying registry request attempt 1 at 19:49:04
+37 verbose etag "EDHQV6WJ33Y6SDFTJ4OTVM2FB"
+38 http GET https://registry.npmjs.org/ejs
+39 silly addNameRange { name: '2.3.1', range: '*', hasData: false }
+40 verbose request where is /2.3.1
+41 verbose request registry https://registry.npmjs.org/
+42 verbose url raw /2.3.1
+43 verbose url resolving [ 'https://registry.npmjs.org/', './2.3.1' ]
+44 verbose url resolved https://registry.npmjs.org/2.3.1
+45 verbose request where is https://registry.npmjs.org/2.3.1
+46 info trying registry request attempt 1 at 19:49:04
+47 http GET https://registry.npmjs.org/2.3.1
+48 http 304 https://registry.npmjs.org/ejs
+49 silly registry.get cb [ 304,
+49 silly registry.get   { date: 'Sun, 03 May 2015 14:19:06 GMT',
+49 silly registry.get     via: '1.1 varnish',
+49 silly registry.get     'last-modified': 'Sun, 03 May 2015 14:19:06 GMT',
+49 silly registry.get     'cache-control': 'max-age=60',
+49 silly registry.get     etag: '"EDHQV6WJ33Y6SDFTJ4OTVM2FB"',
+49 silly registry.get     age: '51',
+49 silly registry.get     connection: 'keep-alive',
+49 silly registry.get     'x-served-by': 'cache-fra1234-FRA',
+49 silly registry.get     'x-cache': 'HIT',
+49 silly registry.get     'x-cache-hits': '1',
+49 silly registry.get     'x-timer': 'S1430662746.036316,VS0,VE0',
+49 silly registry.get     vary: 'Accept' } ]
+50 verbose etag https://registry.npmjs.org/ejs from cache
+51 silly addNameRange number 2 { name: 'ejs', range: '>=0.8.5-0 <0.9.0-0', hasData: true }
+52 silly addNameRange versions [ 'ejs',
+52 silly addNameRange   [ '0.0.1',
+52 silly addNameRange     '0.0.2',
+52 silly addNameRange     '0.0.3',
+52 silly addNameRange     '0.0.4',
+52 silly addNameRange     '0.1.0',
+52 silly addNameRange     '0.2.0',
+52 silly addNameRange     '0.2.1',
+52 silly addNameRange     '0.3.0',
+52 silly addNameRange     '0.3.1',
+52 silly addNameRange     '0.4.0',
+52 silly addNameRange     '0.4.1',
+52 silly addNameRange     '0.4.2',
+52 silly addNameRange     '0.4.3',
+52 silly addNameRange     '0.5.0',
+52 silly addNameRange     '0.6.0',
+52 silly addNameRange     '0.6.1',
+52 silly addNameRange     '0.7.0',
+52 silly addNameRange     '0.7.1',
+52 silly addNameRange     '0.7.2',
+52 silly addNameRange     '0.8.0',
+52 silly addNameRange     '0.8.1',
+52 silly addNameRange     '0.8.2',
+52 silly addNameRange     '0.8.3',
+52 silly addNameRange     '0.8.4',
+52 silly addNameRange     '0.8.5',
+52 silly addNameRange     '0.8.6',
+52 silly addNameRange     '0.8.8',
+52 silly addNameRange     '1.0.0',
+52 silly addNameRange     '2.0.2',
+52 silly addNameRange     '2.0.3',
+52 silly addNameRange     '2.0.4',
+52 silly addNameRange     '2.0.5',
+52 silly addNameRange     '2.0.6',
+52 silly addNameRange     '2.0.7',
+52 silly addNameRange     '2.0.8',
+52 silly addNameRange     '2.1.1',
+52 silly addNameRange     '2.1.2',
+52 silly addNameRange     '2.1.3',
+52 silly addNameRange     '2.1.4',
+52 silly addNameRange     '2.2.1',
+52 silly addNameRange     '2.2.2',
+52 silly addNameRange     '2.2.3',
+52 silly addNameRange     '2.2.4',
+52 silly addNameRange     '2.3.1' ] ]
+53 verbose addNamed [ 'ejs', '0.8.8' ]
+54 verbose addNamed [ '0.8.8', '0.8.8' ]
+55 silly lockFile 37d7c450-ejs-0-8-8 ejs@0.8.8
+56 verbose lock ejs@0.8.8 /Users/user/.npm/37d7c450-ejs-0-8-8.lock
+57 silly lockFile 37d7c450-ejs-0-8-8 ejs@0.8.8
+58 silly lockFile 37d7c450-ejs-0-8-8 ejs@0.8.8
+59 silly lockFile 05610aaa-ejs-0-8-5 ejs@~0.8.5
+60 silly lockFile 05610aaa-ejs-0-8-5 ejs@~0.8.5
+61 http 404 https://registry.npmjs.org/2.3.1
+62 verbose headers { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+62 verbose headers   'content-type': 'application/json',
+62 verbose headers   'cache-control': 'max-age=0',
+62 verbose headers   'content-length': '51',
+62 verbose headers   'accept-ranges': 'bytes',
+62 verbose headers   date: 'Sun, 03 May 2015 14:19:06 GMT',
+62 verbose headers   via: '1.1 varnish',
+62 verbose headers   age: '0',
+62 verbose headers   connection: 'keep-alive',
+62 verbose headers   'x-served-by': 'cache-fra1225-FRA',
+62 verbose headers   'x-cache': 'MISS',
+62 verbose headers   'x-cache-hits': '0',
+62 verbose headers   'x-timer': 'S1430662746.010737,VS0,VE109' }
+63 silly registry.get cb [ 404,
+63 silly registry.get   { server: 'CouchDB/1.5.0 (Erlang OTP/R16B03)',
+63 silly registry.get     'content-type': 'application/json',
+63 silly registry.get     'cache-control': 'max-age=0',
+63 silly registry.get     'content-length': '51',
+63 silly registry.get     'accept-ranges': 'bytes',
+63 silly registry.get     date: 'Sun, 03 May 2015 14:19:06 GMT',
+63 silly registry.get     via: '1.1 varnish',
+63 silly registry.get     age: '0',
+63 silly registry.get     connection: 'keep-alive',
+63 silly registry.get     'x-served-by': 'cache-fra1225-FRA',
+63 silly registry.get     'x-cache': 'MISS',
+63 silly registry.get     'x-cache-hits': '0',
+63 silly registry.get     'x-timer': 'S1430662746.010737,VS0,VE109' } ]
+64 silly lockFile b28e73c6-2-3-1 2.3.1@
+65 silly lockFile b28e73c6-2-3-1 2.3.1@
+66 error 404 404 Not Found: 2.3.1
+66 error 404
+66 error 404 '2.3.1' is not in the npm registry.
+66 error 404 You should bug the author to publish it
+66 error 404 It was specified as a dependency of 'Untitled-Chat'
+66 error 404
+66 error 404 Note that you can also install from a
+66 error 404 tarball, folder, or http url, or git url.
+67 error System Darwin 13.4.0
+68 error command "node" "/usr/local/bin/npm" "install" "ejs" "2.3.1"
+69 error cwd /Users/user/Documents/anonymous_chat_for_women_with_google_auth
+70 error node -v v0.10.33
+71 error npm -v 1.4.28
+72 error code E404
+73 verbose exit [ 1, true ]
