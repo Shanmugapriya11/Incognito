@@ -1,6 +1,6 @@
 
 <html>   
-<head><title>VoxPopuli</title>
+<head><title>Incognito</title>
 <meta charset="utf-8">
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link href="css/bubble.css" rel='stylesheet' type='text/css' />
@@ -16,264 +16,76 @@
 
 <script src="js/moment.js"></script>
 <script src="js/livestamp.min.js"></script>
-<script src="js/utils.js"></script>
 
+<script src="js/core_utils.js"></script>
+<script src="js/client.js"></script>
+<script src="js/initializer.js"></script>
 
 <script>
-        var URL    = window.location.protocol + "//" + window.location.host;
-        var socket = io.connect(URL);
-        var maxval = Number.MIN_VALUE, minval = Number.MAX_VALUE;
-        var unlock = true;
-        var username,usertype,userID,imageNo,startTime,endTime,timediff;
 
-        socket.on('update_chat', function (data) {
-                data = JSON.parse(data);
-                composeMsg(data,"append");   
-        });
+    var maxval = Number.MIN_VALUE, minval = Number.MAX_VALUE;
+    var unlock = true;
+    var userName,usertype,userID,imageNo,startTime,endTime,timediff,endEpoch,currentEpoch;
+    var IMAGES_COUNT = 300;
+    var Incognito = {},Helper = {};
 
-        socket.on('update_old_chat', function (data) {
-            $.each(data,function( intIndex, objValue ){
-                composeMsg(objValue,"prepend");
-            })      
-            unlock = true;
-        });
-
-        socket.on('update_users', function(data) {
-            $('#count').empty();
-            $('#count').append("No of participants : " + data);
-                
-        });
-
-        socket.on('update_vote', function(question_id) {
-            value = parseInt($("#vote_" + question_id).text());
-            $("#vote_" + question_id).text(value + 1);
-        });
-
-
-        socket.on('remove_vote', function(question_id) {
-            value = parseInt($("#vote_" + question_id).text());
-            $("#vote_" + question_id).text(value - 1);
-         });   
-
-        socket.on('update_top_questions', function (data) {
-            $('#top_questions').empty();
-            if(data.length){
-                $.each(data,function( intIndex, objValue ){
-                    composeQues(objValue);
-                })
-            }else {
-                $('#top_questions')
-                .append(' <p>Do vote the questions!<p>');      
-            }    
-        });
-
-                function elapsedisplay() {
-                    var current = new Date();
-                    var timeDiff = current - startTime;
-                    display(timeDiff,".elapsetime","Elapsed Time ")
-                    setTimeout(elapsedisplay, 1000);
-                 }   
-
-                function remainingdisplay() {
-                    
-                    var current = new Date();
-                    var timeDiff = endTime - current;
-                    display(timeDiff,".remainingtime","Remaining Time ")
-                    setTimeout(remainingdisplay, 1000);
-                }  
-
-                $(function(){
-                
-                    startTime = new Date('08/15/2015  9:00:00 AM');
-                    endTime   = new Date('08/20/2015  9:00:00 PM');
-                    timediff  = Math.floor((Date.parse(endTime) - Date.now()) / 1000);
-
-                    setTimeout(elapsedisplay, 1000);
-                    setTimeout(remainingdisplay,1000);
-
-                    setInterval(function(){ 
-                        socket.emit('send_top_questions',minval);
-                    }, 300000);
-                
-                    //attach the "wheel" event if it is supported, otherwise "mousewheel" event is used
-                    $("html").on(("onwheel" in document.createElement("div") ? "wheel" : "mousewheel"), function (e) {
-                        var evt = e.originalEvent || e;
-
-                        //this is what really matters
-                        var deltaY = evt.deltaY || (-1 / 40 * evt.wheelDelta), //wheel || mousewheel
-                            scrollTop = $(this).scrollTop() || $("body").scrollTop(), //fix safari
-                            scrollText = "";
-
-                        if (deltaY < 0) {
-                            if (minval != 1 && minval > 0 && minval != Number.MAX_VALUE && unlock){
-                                unlock = false;
-                                socket.emit('load_previous',minval);
-                                minval = minval - 5;
-                            }
-                            else if(minval < 0 || minval == 1) {
-                                $("html").off("onwheel" in document.createElement("div") ? "wheel" : "mousewheel") 
-                            }
-                        }
-                    });
+    jQuery(document).ready(function () {
+        userName  = "<%= userName %>";
+        userID    = "<%= userID %>";
+        startTime = new Date("<%= startTime %>");
+        endTime   = new Date("<%= endTime %>");
+        imageNo   = userID % IMAGES_COUNT;
+        imageSrc  = "/images/profile_pictures/random/"+imageNo+".png"
+        socket.emit('send_new_user',{userID: userID, userName: userName});
         
-                    $('.voting').hide();
-                    $('.like').hide();
-                    
-                    username = "<%= username %>";
-                    usertype = "<%= usertype %>";
-                    userID   = parseInt("<%= userID %>");
-                    imageNo  = userID % 60;
+        endEpoch     = endTime.getTime();
+        currentEpoch = Date.now();
+        timediff     = Math.floor(endEpoch - currentEpoch);
 
-                    socket.emit('send_new_user',{type: usertype, name: username});
-                    imgsrc = "/images/profile_pictures/noun_project/"+imageNo+".png"
-                    $('#profileID').attr('src', imgsrc);
-                    $('#user_name').append(username);
-
-                    $("#dialog-message").dialog({
-                        modal: true,
-                        draggable: false,
-                        resizable: false,
-                        show: 'blind',
-                        hide: 'blind',
-                        width: 800,
-                        dialogClass: 'no-close success-dialog',//'ui-dialog-osx',
-                        buttons: {
-                            "Agree": function() {
-                                $(this).dialog("close");
-                            }
-                        }
-                    });
-
-                $('#download').hide();
-
-                $('#data').focus();
-                
-                $('#datasend').click( function() {
-                        var message = $('#data').val();
-                        if(message.length != 0){
-                            $('#data').val('');
-                            socket.emit('send_chat',message);
-                        }
-                        $('#data').focus();
-                });
-
-                $('#ac-2').click( function(){
-                    socket.emit('send_top_questions');
-                });
-
-                setTimeout(function() {
-                    $("#sendBox").hide();
-                },timediff);
-                
-                setTimeout(function() {
-                    $.get('/generatingPDF',{},function(data){
-                        $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
-                    })
-                },timediff);
-            
-                
-
-                // $('#data').keypress(function(e) {
-                //      var code = e.keyCode || e.which;
-                //      console.log(code);
-                //      console.log("ahsas");
-                //         if(code == 13) {
-                //                 $(this).blur();
-                //                 var message = $('#data').val();
-                //                 if(message.length != 0){
-                //                         console.log("sending data");
-                //                         $('#data').val('');
-                //                         socket.emit('sendchat',message);
-                //                 }
-                //             $('#data').focus();
-                //                 //$('#datasend').focus().click();
-                //         }
-
-                // });
-                
-                // $('#pdf').click( function() {
-                //     $.get('/generatingPDF',{},function(data){
-                //         console.log(data)
-                //         $('#download').show();
-                //         $('#pdf').hide();
-                        
-                //     })
-                // });
-                //  $('#download').click( function() {
-                //     window.location = "/download"
-                //         $('#pdf').show();
-                //         $('#download').hide();
-                // });
-
-                $("#conversation")
-                .on('mouseenter','.list',function () {
-                    var num = this.id.match(/\d+/)[0];
-                    $("#check_" + num).show();
-                })
-                .on('mouseleave','.list',function() {
-                    var num = this.id.match(/\d+/)[0];
-                    $("#check_" + num).hide();
-                })
-                .on('click','.like',function () {
-                    var num = this.id.match(/\d+/)[0];
-                    $("#tolikeimg_" + num).show();
-                    $("#likeimg_" + num).hide();
-                    socket.emit('send_remove_vote',num);
-
-                })  
-                .on('click','.tolike',function () {
-                    var num = this.id.match(/\d+/)[0];
-                    $("#likeimg_" + num).show();
-                    $("#tolikeimg_" + num).hide();
-                    socket.emit('send_update_vote',num);
-                });
-
-                $("#top_questions")
-                .on('click','.questions',function (e) {
-
-                    var num = this.id.match(/\d+/)[0];
-                    
-                    var container = $('#conversation'),
-                    scrollTo = $('#list_'+num);
-
-                    container.animate({
-                        scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
-                    });
-                    $("#list_"+num).fadeOut(1000).fadeIn(1000);
-                });
-        
-        });
+        Incognito = Initializer;
+        Incognito.init();
+        Helper = CoreUtil;
+    });
 
 </script>
-
 </head>
+
 <body id="chat">
-<div id="dialog-message" title="Important information">
+<div id="dialog-message" title="Important Information">
     <span class="ui-state-default">
         <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0 0;"></span>
     </span>
     <div style="margin-left: 23px;">
         <p>
             Guidelines for Women @ Freshdesk
-            We're closed during the winter holiday from 21st of December, 2010 until 10th of January 2011.
             <br /><br />
-            Our hotel will reopen at 11th of January 2011.<br /><br />
-            Another line which demonstrates the auto height adjustment of the dialog component.
+            We don't track you.<br />
+            We don't know who you are.  Your Web browser automatically sends information about your computer, e.g. your User agent and IP address. But, we do not log (store) it at all.<br />
             <br /><br />
-            <p class="center"><img id="profileID" src=""/> = (You) </p>
+            <p class="center">
+                <img src="/images/you.jpeg"/>
+                <img class="smallSizeImg" id="profileID_2" src=""/>
+            </p>
         </p>
     </div>
 </div>
      
      <div id="details">
             <div id="heading">
-                <h1>Women @ Freshdesk</h1>
-                Don’t dream it. Drive it...
+                <div class="main-wrap">
+                    <div class="lefttext">
+                        <h3>Women @ Freshdesk</h3>
+                        Don’t dream it. Drive it...
+                    </div>
+                    <div class="rightimg">
+                        <img src="/images/incognito.png"/>
+                    </div>
+                </div>
             </div>
             <section class="ac-container">
                 <div>
                     <input id="ac-1" name="accordion-1" type="radio" checked="">
-                    <label for="ac-1">INFO</label>
+                    <label for="ac-1">Info</label>
                     <article class="ac-small">
                         <br/>
                         <div id="info">
@@ -307,12 +119,12 @@
                     </article>
                 </div>
               
-                <div>
+               <!--  <div>
                     <input id="ac-4" name="accordion-1" type="radio">
                     <label for="ac-4">Feedback</label>
                     <article class="ac-large">
                     </article>
-                </div>
+                </div> -->
             </section>
             <br/>
         </div>   
@@ -323,10 +135,10 @@
             <div id="footer">
                 <div id="sendBox">
                     <div class="item">
-                        <img  id="profileID" src=""/>
-                        <span class="username">(You)</span>
+                        <img class="smallSizeImg" id="profileID_1" src=""/>
+                        <span class="userName">(You)</span>
                     </div>
-                     <textarea id="data" rows="5" cols="140" placeholder="Write a reply..."></textarea>
+                     <textarea id="data" rows="5" cols="130" placeholder="Share your thoughts..."></textarea>
                      <input type="button" id="datasend" value="Send" />
                 </div>     
             </div>

@@ -8,9 +8,7 @@ pool.getConnection(function(err, connection){
     if(err) {
       throw err;
     }else{
-      console.log("Inserting the data" + result);
       callback(err,result);
-
     }
   });
   connection.release();
@@ -24,7 +22,6 @@ pool.getConnection(function(err, connection){
     if(err) {
       throw err;
     }else{
-      console.log("findone : "+result);
       callback(err, result);
     }
   });
@@ -32,5 +29,5 @@ pool.getConnection(function(err, connection){
 })
 };
 
-exports.save = save
+exports.save    = save
 exports.findOne = findOne 
