@@ -45,15 +45,16 @@ Initializer = (function () {
                 resizable: false,
                 show: 'blind',
                 hide: 'blind',
-                width: 800,
+                width: 500,
+                height: 350,
                 dialogClass: 'ui-dialog-osx',
                 buttons: {
-                    "Agree": function() {
+                    "Got it!": function() {
                         $(this).dialog("close");
                     },
-                    "Disagree": function() {
-                        window.location.href = "/";
-                    }
+                    // "Disagree": function() {
+                    //     window.location.href = "/";
+                    // }
                 }
             });
         },
@@ -134,35 +135,35 @@ Initializer = (function () {
                 $("#list_"+num).fadeOut(1000).fadeIn(1000);
             });
         },
-        initializeTimeout: function(){
-            setTimeout(this.elapsedisplay, 1000);
-            setTimeout(this.remainingdisplay,1000);
+        // initializeTimeout: function(){
+        //     setTimeout(this.elapsedisplay, 1000);
+        //     setTimeout(this.remainingdisplay,1000);
 
-            setInterval(function(){ 
-                socket.emit('send_top_questions',minval);
-            }, 300000);
+        //     setInterval(function(){ 
+        //         socket.emit('send_top_questions',minval);
+        //     }, 300000);
 
-            setTimeout(function() {
-                $("#sendBox").hide();
-            },timediff);
+        //     setTimeout(function() {
+        //         $("#sendBox").hide();
+        //     },timediff);
             
-            setTimeout(function() {
-                $.get('/generatingPDF',{},function(data){
-                    if(userName != "anonymous_user"){
-                        $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
-                    }else{
-                        $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
-                    }
+        //     setTimeout(function() {
+        //         $.get('/generatingPDF',{},function(data){
+        //             if(userName != "anonymous_user"){
+        //                 $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
+        //             }else{
+        //                 $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
+        //             }
 
-                    $("#conversation").unbind();
-                })
-            },timediff);
-        }
+        //             $("#conversation").unbind();
+        //         })
+        //     },timediff);
+        // }
     };
     return {
         init: function () {
             _IG.initialize();
-            _IG.initializeTimeout();
+            //_IG.initializeTimeout();
             _IG.bindEvents();
         }
     };  

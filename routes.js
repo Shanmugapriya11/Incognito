@@ -10,7 +10,11 @@ module.exports=function(app) {
     app.use(flash()); // use connect-flash for flash messages stored in session
 
     app.get('/', function (req, res) {
-        res.sendfile(__dirname + '/views/index.html');
+        var currentTime = new Date();
+        if (currentTime < startTime)
+            res.render('start', { timestamp: Math.floor(Date.parse(startTime) / 1000)});
+        else
+            res.sendfile(__dirname + '/views/index.html');
     });
 
     app.get('/chat', function (req, res) {
@@ -30,7 +34,6 @@ module.exports=function(app) {
 
     app.get('/generatingPDF',function(req, res){
         helpers.generatingPDF();
-        //res.sendStatus(200);
         res.status(200).end();
     });
 

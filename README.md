@@ -1,3 +1,1 @@
-# Incognito-
-# Incognito
-# Incognito
+A Anonymous chat application

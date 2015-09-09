@@ -28,6 +28,41 @@
     var userName,usertype,userID,imageNo,startTime,endTime,timediff,endEpoch,currentEpoch;
     var IMAGES_COUNT = 300;
     var Incognito = {},Helper = {};
+        
+        function format(n){
+            return n > 9 ? "" + n: "0" + n;
+        };
+        
+        function displayTime (timeDiff,element,text) {
+            timeDiff /= 1000;
+
+            var seconds = Math.round(timeDiff % 60);
+            timeDiff = Math.floor(timeDiff / 60);
+
+            var minutes = Math.round(timeDiff % 60);
+            timeDiff = Math.floor(timeDiff / 60);
+
+            var hours = Math.round(timeDiff % 24);
+            timeDiff = Math.floor(timeDiff / 24);
+
+            var days = timeDiff;
+            text = '<span class="light-shades">'+text +'</span>'
+            $(element).html(text + this.format(hours) + ":" + this.format(minutes) + ":" + this.format(seconds));
+        }; 
+        function elapsedisplay() {
+            var current = new Date();
+            var timeDiff = current - startTime;
+            
+            displayTime(timeDiff,".elapsetime",'ELAPSED TIME: ');
+            setTimeout(elapsedisplay, 1000);
+        };
+        function remainingdisplay() {
+            var current = new Date();
+            var timeDiff = endTime - current;
+            
+            displayTime(timeDiff,".remainingtime",'REMAINING TIME: ');
+            setTimeout(remainingdisplay, 1000);
+        };
 
     jQuery(document).ready(function () {
         userName  = "<%= userName %>";
@@ -45,23 +80,45 @@
         Incognito = Initializer;
         Incognito.init();
         Helper = CoreUtil;
+            
+        setTimeout(elapsedisplay, 1000);
+        setTimeout(remainingdisplay,1000);
+        setInterval(function(){ 
+                socket.emit('send_top_questions',minval);
+            }, 300000);
+
+        setTimeout(function() {
+            $("#sendBox").hide();
+        },timediff);
+        
+        setTimeout(function() {
+            $.get('/generatingPDF',{},function(data){
+                if(userName != "anonymous_user"){
+                    $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
+                }else{
+                    $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
+                }
+
+                $("#conversation").unbind();
+            })
+        },timediff);
     });
 
 </script>
 </head>
 
 <body id="chat">
-<div id="dialog-message" title="Important Information">
+<div id="dialog-message" title="Guidelines for the conversation">
     <span class="ui-state-default">
         <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0 0;"></span>
     </span>
     <div style="margin-left: 23px;">
         <p>
-            Guidelines for Women @ Freshdesk
-            <br /><br />
-            We don't track you.<br />
-            We don't know who you are.  Your Web browser automatically sends information about your computer, e.g. your User agent and IP address. But, we do not log (store) it at all.<br />
-            <br /><br />
+            <ul>
+                 <li><span class="bold">We don't know who you are. We don't track you.</span><br /></li>
+                 We don't log your IP address.<br /><br /><br />
+                 <li><span class="bold">So be nice, be polite and contribute constructively!</span></br></li>
+            </ul>
             <p class="center">
                 <img src="/images/you.jpeg"/>
                 <img class="smallSizeImg" id="profileID_2" src=""/>
@@ -73,30 +130,38 @@
      <div id="details">
             <div id="heading">
                 <div class="main-wrap">
-                    <div class="lefttext">
-                        <h3>Women @ Freshdesk</h3>
-                        Don’t dream it. Drive it...
+                    <div class="right-text"><br/>
+                        <span class="title">Women @ Freshdesk</span></br/>
+                        <span class="light-shades">11 Sep 2015, 3:30PM - 5:30PM</span>
                     </div>
-                    <div class="rightimg">
-                        <img src="/images/incognito.png"/>
+                    <div class="left-img">
+                        <img class="small-logo" src="/images/incognito-logo.png"/>
                     </div>
                 </div>
             </div>
+                    <hr>
+                <div class="justify">
+                    <span class="light-shades">
+                Thanks for participating in our ‘Women @ Freshdesk’ event! <br/>
+                We want to hear your feedback on the event, and ideas on how we can make this more useful for you in the future. Your identity will be completely anonymous, so you can discuss specific issues or concerns you may have, provide suggestions to others, ask for advice or generally vent to your fellow women!<br/>
+                As a first time experiment, we will have this open until Monday evening. If this is something useful, we will have this up and running more often!<br/>
+                    </span>
+                </div>               
             <section class="ac-container">
                 <div>
                     <input id="ac-1" name="accordion-1" type="radio" checked="">
-                    <label for="ac-1">Info</label>
+                    <label for="ac-1">Basic Information</label>
                     <article class="ac-small">
                         <br/>
                         <div id="info">
-                            Moderator          : Monika Gunalan<br/>
+                            <span class="light-shades">MODERATOR:</span> Monika Gunalan<br/>
                             <div id="count"></div>
                             <div class="elapsetime"></div>
                             <div class="remainingtime"></div>
                         </div>    
                     </article>
                 </div>
-                <div>
+<!--                 <div>
                     <input id="ac-3" name="accordion-1" type="radio">
                     <label for="ac-3">Agenda</label>
                     <article class="ac-medium">
@@ -109,10 +174,10 @@
                          </ul>
                     </div>   
                     </article>
-                </div>
+                </div> -->
                 <div>
                     <input id="ac-2" name="accordion-1" type="radio">
-                    <label for="ac-2">Top Questions</label>
+                    <label for="ac-2">Top Posts</label>
                     <article class="ac-large">
                           <div id="top_questions">
                             <p>Do vote the questions!<p></div>

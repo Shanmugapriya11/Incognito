@@ -47,7 +47,7 @@
     box-shadow: 0 0 0 1px rgba(155,155,155,0.3),0 2px 2px rgba(0,0,0,0.1);
     height: 30px;
     line-height: 21px;
-    font-size: 13px;
+    font-size: 12px;
 }
 
 .ac-container label:hover:after,.ac-container input:checked + label:hover:after {
@@ -110,5 +110,5 @@
 }
 
 .ac-container input:checked ~ article.ac-large {
-    height: 340px;
+    height: 400px;
 }
