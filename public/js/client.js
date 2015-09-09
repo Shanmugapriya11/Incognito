@@ -14,6 +14,7 @@ var socket = io.connect(URL);
     });
 
     socket.on('update_users', function(data) {
+        console.log(data);
         $('#count').empty();
         $('#count').append('<span class="light-shades">NO. OF PARTICIPANTS:</span> ' + data);
     });

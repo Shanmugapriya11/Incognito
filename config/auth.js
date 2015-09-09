@@ -16,9 +16,9 @@ module.exports = {
     },
 
     'googleAuth' : {
-        'clientID'      : '956662685780-cqqi91bjf4r21222qcplmj941g1jocfu.apps.googleusercontent.com',
-        'clientSecret'  : 'cZXHX9ahBHYIkP_aXwMojZbI',
-        'callbackURL'   : 'http://127.0.0.1/auth/google/callback'
+        'clientID'      : '956662685780-6oobsh1t33k297gfeakeus3gvdjmnbfl.apps.googleusercontent.com',
+        'clientSecret'  : 'WOBd_4OsB-CtglID7f5cZEIQ',
+        'callbackURL'   : 'http://incognito.freshtoken.com/auth/google/callback'
     }
 
 };
