@@ -1,1 +1,1 @@
-A Anonymous chat application
+A anonymous chat app
