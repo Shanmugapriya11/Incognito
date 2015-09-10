@@ -37,7 +37,8 @@ Initializer = (function () {
             $('.like').hide();
             $('#data').focus();        
             $('.smallSizeImg').attr('src', imageSrc);
-            $('#user_name').append(userName);
+            //$('.userName').append(userName);
+            $('.userName').append('<span class="light-shades">(User '+userID+')</span>');
 
             $("#dialog-message").dialog({
                 modal: true,

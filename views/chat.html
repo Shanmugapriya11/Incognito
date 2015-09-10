@@ -53,14 +53,14 @@
             var current = new Date();
             var timeDiff = current - startTime;
             
-            displayTime(timeDiff,".elapsetime",'ELAPSED TIME: ');
+            displayTime(timeDiff,".elapsetime",'Elapsed Time: ');
             setTimeout(elapsedisplay, 1000);
         };
         function remainingdisplay() {
             var current = new Date();
             var timeDiff = endTime - current;
             
-            displayTime(timeDiff,".remainingtime",'REMAINING TIME: ');
+            displayTime(timeDiff,".remainingtime",'Remaining Time: ');
             setTimeout(remainingdisplay, 1000);
         };
 
@@ -108,20 +108,21 @@
 </head>
 
 <body id="chat">
-<div id="dialog-message" title="Guidelines for the conversation">
+<div id="dialog-message" title="Things to know before you join in">
     <span class="ui-state-default">
         <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0 0;"></span>
     </span>
     <div style="margin-left: 23px;">
         <p>
             <ul>
-                 <li><span class="bold">We don't know who you are. We don't track you.</span><br /></li>
-                 We don't log your IP address.<br /><br /><br />
-                 <li><span class="bold">So be nice, be polite and contribute constructively!</span></br></li>
-            </ul>
-            <p class="center">
-                <img src="/images/you.jpeg"/>
-                <img class="smallSizeImg" id="profileID_2" src=""/>
+                <li><span class="bold">We don't know who you are. We don't track you.</span><br /></li>
+                <br/>
+                <li><span class="bold">So be nice, be polite and contribute constructively!</span></br></li>
+                <br/>
+                <li>This icon will represent <span class="bold">you</span> in this conversation</li>
+                <br/>
+            </ul><center>
+                <img class="smallSizeImg" id="profileID_2" src=""/></center>
             </p>
         </p>
     </div>
@@ -139,11 +140,13 @@
                     </div>
                 </div>
             </div>
+                    <span class="light-shades">
                     <hr>
+                </span>
                 <div class="justify">
                     <span class="light-shades">
-                Thanks for participating in our ‘Women @ Freshdesk’ event! <br/>
-                We want to hear your feedback on the event, and ideas on how we can make this more useful for you in the future. Your identity will be completely anonymous, so you can discuss specific issues or concerns you may have, provide suggestions to others, ask for advice or generally vent to your fellow women!<br/>
+                Thanks for participating in our ‘Women @ Freshdesk’ event! <br/><br/>
+                We want to hear your feedback on the event, and ideas on how we can make this more useful for you in the future. Your identity will be completely anonymous, so you can discuss specific issues or concerns you may have, provide suggestions to others, ask for advice or generally vent to your fellow women!<br/><br/>
                 As a first time experiment, we will have this open until Monday evening. If this is something useful, we will have this up and running more often!<br/>
                     </span>
                 </div>               
@@ -154,7 +157,7 @@
                     <article class="ac-small">
                         <br/>
                         <div id="info">
-                            <span class="light-shades">MODERATOR:</span> Monika Gunalan<br/>
+                            <span class="light-shades">Moderator:</span> Monika Gunalan<br/>
                             <div id="count"></div>
                             <div class="elapsetime"></div>
                             <div class="remainingtime"></div>
@@ -201,7 +204,8 @@
                 <div id="sendBox">
                     <div class="item">
                         <img class="smallSizeImg" id="profileID_1" src=""/>
-                        <span class="userName">(You)</span>
+                        <span class="userName bold">You<br/></span>
+
                     </div>
                      <textarea id="data" rows="5" cols="130" placeholder="Share your thoughts..."></textarea>
                      <input type="button" id="datasend" value="Send" />

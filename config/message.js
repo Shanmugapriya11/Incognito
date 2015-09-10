@@ -108,7 +108,7 @@ pool.getConnection(function(err, connection){
 var top_questions = function(callback){
 
 pool.getConnection(function(err, connection){
-  connection.query("SELECT id, message, user_id FROM message WHERE upvote > 0 ORDER BY upvote DESC LIMIT 3", function(err, rows){
+  connection.query("SELECT * FROM message WHERE upvote > 0 ORDER BY upvote DESC LIMIT 3", function(err, rows){
     if(err) {
       throw err;
     }else{

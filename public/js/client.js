@@ -16,7 +16,7 @@ var socket = io.connect(URL);
     socket.on('update_users', function(data) {
         console.log(data);
         $('#count').empty();
-        $('#count').append('<span class="light-shades">NO. OF PARTICIPANTS:</span> ' + data);
+        $('#count').append('<span class="light-shades">No. of Participants:</span> ' + data);
     });
 
     socket.on('update_vote', function(question_id) {

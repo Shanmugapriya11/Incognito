@@ -38,7 +38,7 @@ body {
 .justify{
   text-align: justify;
   text-justify: inter-word;
-  font-size: 12px;
+  font-size: 13px;
   margin:2px;
   padding:5px;
 }
@@ -80,7 +80,7 @@ h1 {
 #info {
   margin-left: 10px;
   line-height: 21px !important;
-  font-size: 14px !important;
+  /*font-size: 14px !important;*/
 }
 
 #top_questions {
@@ -88,14 +88,21 @@ h1 {
 }
 
 #top_questions li {
+  padding: 10px;
+  color: #5B97D2;
   font-size: 13px;
   list-style-type: none;
-  margin-left:0px;
+  /*margin-left:0px;
   padding-left:0px;
-  display: inline-block;
+  */display: inline-block;
+}
+#top_questions p {
+  padding: 20px;
+  font-size: 13px;
+
 }
 #top_questions li:hover {
-  color: #158315;
+  color: #93c1f2;/*#158315;*/
 }
 
 .righttext{
@@ -146,11 +153,11 @@ h1 {
    list-style-type: none;
 }
 
-#conversation li:hover {
+/*#conversation li:hover {
    color: #000;
    background-color: #F6F7F8;
    list-style-type: none;
-}
+}*/
 
 a {
   text-decoration:none;
@@ -190,12 +197,12 @@ a {
 }
 
 .smallSizeImg {
-  width: 70px;
-  height: 70px;
+  width: 50px;
+  height: 50px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);  
+  /*box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);  */
 }
 
 .username {
@@ -209,7 +216,7 @@ a {
     height:70px;
     font-size:10pt;
     width:82%;
-    border:1px solid black;
+    border:1px solid #35CE93;
 }
 
 #datasend {
@@ -220,13 +227,13 @@ input[type="button"],input[type="submit"]  {
   -webkit-border-radius: 6;
   -moz-border-radius: 6;
   border-radius: 6px;
-  -webkit-box-shadow: 0px 1px 3px #666666;
+  /*-webkit-box-shadow: 0px 1px 3px #666666;
   -moz-box-shadow: 0px 1px 3px #666666;
   box-shadow: 0px 1px 3px #666666;
-  padding: 10px;
+  */padding: 10px;
   font-size: 14px;
   background: #FF7D42;/*#35CE94;*//*#068481; /*#599bb3;*/
-  border: 1px solid #000000;
+  /*border: 1px solid #000000;*/
 }
 
 /* layout */
@@ -261,15 +268,15 @@ input[type="button"],input[type="submit"]  {
 .smallprofileID {
   width: 50px;
   height: 50px;
-  margin: 1em auto;
+  /*margin: 5px;*/
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
   -webkit-border-radius: 99em;
   -moz-border-radius: 99em;
   border-radius: 99em;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
-} 
+/*  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);
+*/} 
 
 .verysmallprofileID {
   width: 25px;
@@ -302,7 +309,7 @@ input[type="button"],input[type="submit"]  {
   position:absolute;
   bottom:0;
   left:0;
-  padding-left: 5px;
+  padding: 20px;
 }
 
 .leftcommentDateStamp {
@@ -310,7 +317,7 @@ input[type="button"],input[type="submit"]  {
   position:absolute;
   bottom:0;
   right:0;
-  padding-right: 5px;
+  padding: 20px;
 }
 
 /* end of msg div */
