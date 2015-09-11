@@ -2,6 +2,7 @@
 <html>   
 <head><title>Incognito</title>
 <meta charset="utf-8">
+<link rel="shortcut icon" href="/img/favicon.ico" />
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link href="css/bubble.css" rel='stylesheet' type='text/css' />
 <link href="css/container.css" rel='stylesheet' type='text/css' />
@@ -63,6 +64,49 @@
             displayTime(timeDiff,".remainingtime",'Remaining Time: ');
             setTimeout(remainingdisplay, 1000);
         };
+        function generatingPDF() {
+            $.get('/generatingPDF',{},function(data){
+                if(userName != "anonymous_user"){
+            
+                        $("#admin-end-message").dialog({
+                            modal: true,
+                            draggable: false,
+                            resizable: false,
+                            show: 'blind',
+                            hide: 'blind',
+                            width: 600,
+                            height: 300,
+                            dialogClass: 'ui-dialog-osx',
+                            close: function(event, ui) { window.location.href = "/end"; },
+                            buttons: {
+                                "Save conversation as a .pdf": function() {
+                                     window.location.href = "/download";
+                                    },
+                                "Close": function() {
+                                    window.location.href = "/end";
+                                }
+                            }    
+                        });
+// $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
+                }else{
+                        $("#anonymous-end-message").dialog({
+                            modal: true,
+                            draggable: false,
+                            resizable: false,
+                            show: 'blind',
+                            hide: 'blind',
+                            width: 600,
+                            height: 300,
+                            dialogClass: 'ui-dialog-osx',
+                            close: function(event, ui) { window.location.href = "/end"; }
+                        });
+
+                    // $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
+                }
+
+                $("#conversation").unbind();
+            })
+        };
 
     jQuery(document).ready(function () {
         userName  = "<%= userName %>";
@@ -91,43 +135,73 @@
             $("#sendBox").hide();
         },timediff);
         
-        setTimeout(function() {
-            $.get('/generatingPDF',{},function(data){
-                if(userName != "anonymous_user"){
-                    $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
-                }else{
-                    $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
-                }
-
-                $("#conversation").unbind();
-            })
-        },timediff);
+        setTimeout(generatingPDF,timediff);
     });
 
 </script>
 </head>
 
 <body id="chat">
-<div id="dialog-message" title="Things to know before you join in">
-    <span class="ui-state-default">
-        <span class="ui-icon ui-icon-info" style="float:left; margin:0 7px 0 0;"></span>
-    </span>
-    <div style="margin-left: 23px;">
-        <p>
-            <ul>
-                <li><span class="bold">We don't know who you are. We don't track you.</span><br /></li>
-                <br/>
-                <li><span class="bold">So be nice, be polite and contribute constructively!</span></br></li>
-                <br/>
-                <li>This icon will represent <span class="bold">you</span> in this conversation</li>
-                <br/>
-            </ul><center>
-                <img class="smallSizeImg" id="profileID_2" src=""/></center>
+<div style="display:none">
+    <div id="dialog-message" title="Things to know before you join in">
+        <div>
+            <p>
+                <ul>
+                    <li><span class="bold">We don't know who you are. We don't track you.</span><br /></li>
+                    <br/>
+                    <li><span class="bold">So be nice, be polite and contribute constructively!</span></br></li>
+                    <br/>
+                    <li>This icon will represent <span class="bold">you</span> in this conversation</li>
+                </ul>
+                <img class="smallSizeImg" id="profileID_2" src=""/ style="margin-left:45px">
             </p>
-        </p>
+        </div>
     </div>
-</div>
-     
+
+    <div id="anonymous-end-message" title="This conversation is now closed">
+        <div>
+            <br/>
+            <li>
+                <span class="bold">Thank you for participating. Your voice has been heard!</span><br />
+            </li>
+            <br/>
+                <div class="main-wrap">
+                    <div class="leftsidebar" style="width:10%">
+                        <img width="40px" height="70px" src="/images/incognito-logo.png">
+                    </div>
+                    <div class="leftcontent-wrap">
+                        <div class="bubble bubble--dialog">
+                        <div id="anonymous_end_msg">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="clear"></div>        
+        </div>
+    </div>
+    <div id="admin-end-message" title="This conversation is now closed">
+        <div>
+            <br/>
+            <li>
+                <span class="bold">Thank you for creating and facilitating the conversation, Monika!<br/>
+                     You can export everything as a .pdf file now.:)</span><br />
+            </li>
+            <br/>
+                <div class="main-wrap">
+                    <div class="leftsidebar" style="width:10%">
+                        <img width="40px" height="70px" src="/images/incognito-logo.png">
+                    </div>
+                    <div class="leftcontent-wrap">
+                        <div class="bubble bubble--dialog">
+                        <div id="admin_end_msg">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                <div class="clear"></div>        
+        </div>
+    </div>
+</div>     
      <div id="details">
             <div id="heading">
                 <div class="main-wrap">

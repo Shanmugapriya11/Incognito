@@ -10,7 +10,7 @@
   padding: 20px;
   position: relative;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
-  min-width: 15%;
+  min-width: 20%;
   min-height: 60px;
   max-width: 50%;
   word-wrap: break-word;
@@ -56,7 +56,7 @@
   background: #E7F7F1;/*#F4F1F0; /*#d3e5eb;*//*#E0EEE0;*/
   float: right;	
   margin: 5px 20px 5px 0; 
-  min-width: 15%;
+  min-width: 20%;
   min-height: 60px;
   max-width: 50%;
   border-radius: 6px;
@@ -103,7 +103,7 @@
 	background: #F2F2F2;/*#DAF4F0;/*#CFDBC5;*/
 	float: left;
 	margin: 5px 0px 5px 20px;         
-    min-width: 15%;
+    min-width: 20%;
     min-height: 60px;
     max-width: 50%;
     border-radius: 6px;
@@ -139,4 +139,39 @@
 }
 .bubble--admin:hover:after{
 	border-right-color: #eae8e8;
+}
+
+
+.bubble--dialog {
+	background: #FFF;/*#DAF4F0;/*#CFDBC5;*/
+	float: left;
+	margin: 5px 0px 5px 20px;         
+    min-width: 25%;
+    min-height: 60px;
+    max-width: 50%;
+    border-radius: 6px;
+}
+
+.bubble--dialog:after, .bubble--dialog:before {
+	right: 100%;
+	top: 25%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.bubble--dialog:after {
+	border-color: rgba(224, 238, 224, 0);
+	border-right-color: #FFF;
+	border-width: 12px;
+	margin-top: -12px;
+}
+.bubble--dialog:before {
+	border-color: rgba(187, 187, 187, 0);
+	border-right-color: #bbb;
+	border-width: 13px;
+	margin-top: -13px;
 }

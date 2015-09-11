@@ -38,7 +38,7 @@ body {
 .justify{
   text-align: justify;
   text-justify: inter-word;
-  font-size: 13px;
+  font-size: 12px;
   margin:2px;
   padding:5px;
 }
@@ -60,7 +60,7 @@ body {
 	float:right;
 	/*overflow:auto;*/
 	overflow-x:hidden; 
-  /*overflow-y:hidden; */
+  overflow-y:hidden; 
   /*background-color: #89EAC5;*/
 	/*background:#35CE94; #01C5BB;#F0F8FF;*/
   border-left: 1px solid #89EAC5;
@@ -80,6 +80,7 @@ h1 {
 #info {
   margin-left: 10px;
   line-height: 21px !important;
+  font-size: 13px;
   /*font-size: 14px !important;*/
 }
 
@@ -90,7 +91,7 @@ h1 {
 #top_questions li {
   padding: 10px;
   color: #5B97D2;
-  font-size: 13px;
+  font-size: 12px;
   list-style-type: none;
   /*margin-left:0px;
   padding-left:0px;
@@ -166,7 +167,7 @@ a {
 
 .voting {
     vertical-align: top;
-    display: inline-block;
+    /*display: inline-block;*/
     text-align: center;
     width: 40px;
     position: relative;
@@ -174,7 +175,7 @@ a {
 }
 
 .vote , .username {
-  display: block;
+  /*display: block;*/
   text-align: center;
 }
 
@@ -230,8 +231,10 @@ input[type="button"],input[type="submit"]  {
   /*-webkit-box-shadow: 0px 1px 3px #666666;
   -moz-box-shadow: 0px 1px 3px #666666;
   box-shadow: 0px 1px 3px #666666;
-  */padding: 10px;
+  */
+  padding: 10px;
   font-size: 14px;
+  color:#FFFFFF;
   background: #FF7D42;/*#35CE94;*//*#068481; /*#599bb3;*/
   /*border: 1px solid #000000;*/
 }

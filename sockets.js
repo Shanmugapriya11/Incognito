@@ -9,7 +9,10 @@ module.exports = {
 
             socket.on('send_chat', function (data) {
                 qCount++;
-                msg_details = { id: qCount, user_id: socket.userID , user_name: socket.userName, message: data, time: new Date(), upvote: 0};
+                id = socket.userID == null ? 1 : socket.userID;
+                name = socket.userName == null ? "anonymous_user" : socket.userName;
+
+                msg_details = { id: qCount, user_id: id , user_name: name, message: data, time: new Date(), upvote: 0};
                 db.insert(msg_details);
                 io.sockets.emit('update_chat',JSON.stringify(msg_details));
 

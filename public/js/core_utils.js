@@ -19,7 +19,7 @@ CoreUtil = {
 
             maxval = Math.max(id, maxval);
             minval = Math.min(id, minval);
-
+                    
             if(senderName == "anonymous_user"){
                 style = side = senderID == userID ? "right" : "left";
             }else{

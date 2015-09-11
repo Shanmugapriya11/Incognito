@@ -39,7 +39,9 @@ Initializer = (function () {
             $('.smallSizeImg').attr('src', imageSrc);
             //$('.userName').append(userName);
             $('.userName').append('<span class="light-shades">(User '+userID+')</span>');
-
+            $('#anonymous_end_msg').html('Your voice has been heard <br><br><small class="leftcommentDateStamp" data-livestamp="'+Math.floor(Date.parse(endTime)/1000)+'"></small>');
+            $('#admin_end_msg').html('Good Job! <br><br><small class="leftcommentDateStamp" data-livestamp="'+Math.floor(Date.parse(endTime)/1000)+'"></small>');
+            
             $("#dialog-message").dialog({
                 modal: true,
                 draggable: false,
@@ -47,7 +49,7 @@ Initializer = (function () {
                 show: 'blind',
                 hide: 'blind',
                 width: 500,
-                height: 350,
+                height: 300,
                 dialogClass: 'ui-dialog-osx',
                 buttons: {
                     "Got it!": function() {
@@ -58,6 +60,9 @@ Initializer = (function () {
                     // }
                 }
             });
+            
+
+
         },
         bindEvents: function () {
             //attach the "wheel" event if it is supported, otherwise "mousewheel" event is used
@@ -83,9 +88,12 @@ Initializer = (function () {
         
             $('#datasend').click( function() {
                 var message = $('#data').val();
+
                 if(message.length != 0){
+                    $("div.someClass").text(message);
+                    var escaped = $("<div>").text(message).html();
                     $('#data').val('');
-                    socket.emit('send_chat',message);
+                    socket.emit('send_chat',escaped);
                 }
                 $('#data').focus();
             });

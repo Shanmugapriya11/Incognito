@@ -41,3 +41,7 @@ var socket = io.connect(URL);
             .append(' <p>Do vote the questions!<p>');      
         }    
     });
+    socket.on('disconnect', function(){
+        $("#sendBox").hide();
+        generatingPDF();
+    });
