@@ -14,7 +14,8 @@
 	var timestamp = <%= timestamp %>;
     $(function(){
     	$('#end_msg')
-    	.html('Sorry, but you are too late! <br><br><small class="leftcommentDateStamp" data-livestamp="'+timestamp+'"></small>');
+    	.html('Sorry, but you are too late! <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
+        //.html('Sorry, but you are too late! <br><br><small class="leftcommentDateStamp" data-livestamp="'+timestamp+'"></small>');
     });	
 </script>
 </head>

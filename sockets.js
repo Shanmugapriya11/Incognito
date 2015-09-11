@@ -52,7 +52,7 @@ module.exports = {
 
             socket.on('disconnect', function(){
                 --noOfUsers;
-                noOfUsers = noOfUsers < 0 ? 0 : noOfUsers;
+                noOfUsers = noOfUsers < 0 ? 1 : noOfUsers;
                 io.sockets.emit('update_users', noOfUsers);
             });
 

@@ -39,8 +39,8 @@ Initializer = (function () {
             $('.smallSizeImg').attr('src', imageSrc);
             //$('.userName').append(userName);
             $('.userName').append('<span class="light-shades smallFont">(User '+userID+')</span>');
-            $('#anonymous_end_msg').html('Your voice has been heard <br><br><small class="leftcommentDateStamp" data-livestamp="'+Math.floor(Date.parse(endTime)/1000)+'"></small>');
-            $('#admin_end_msg').html('Good Job! <br><br><small class="leftcommentDateStamp" data-livestamp="'+Math.floor(Date.parse(endTime)/1000)+'"></small>');
+            $('#anonymous_end_msg').html('Your voice has been heard <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
+            $('#admin_end_msg').html('Good Job! <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
             
             $("#dialog-message").dialog({
                 modal: true,

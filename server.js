@@ -15,7 +15,7 @@ var express      = require('express'),
     global.uniqueIDs = 0;
     global.noOfUsers = 0;
     global.qCount    = 0;
-    global.startTime = new Date('09/10/2015  5:30:00 PM');
+    global.startTime = new Date('09/11/2015  5:30:00 PM');
     global.endTime   = new Date('09/14/2015  5:30:00 PM');
 
     app.use(express.json());
@@ -37,9 +37,9 @@ var express      = require('express'),
 
     sockets.startSocketServer(server);
     routes(app);
-    db.truncate_table(function() {
-        console.log("Truncated Table");
-    });
+    // db.truncate_table(function() {
+    //     console.log("Truncated Table");
+    // });
 
     console.log("Listening on port " + port);
     server.listen(port);
