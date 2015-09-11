@@ -22,6 +22,9 @@ CoreUtil = {
                     
             if(senderName == "anonymous_user"){
                 style = side = senderID == userID ? "right" : "left";
+                if (style == "right"){
+                    name = '<span class="userName bold">You<br/></span><span class="light-shades smallFont">('+name+')</span>';
+                }
             }else{
                 style = senderID == userID ? "right" : "admin"
                 side = style == "right" ? "right" : "left"

@@ -7,6 +7,10 @@ body {
 #chat {
 	background:#FFFFFF;
 }
+.smallFont{
+  font-size: 11px;
+  font-weight: normal;
+}
 
 #index{
   margin-left: 300px;
@@ -39,8 +43,12 @@ body {
   text-align: justify;
   text-justify: inter-word;
   font-size: 12px;
-  margin:2px;
+  margin:5px;
   padding:5px;
+}
+hr{
+  margin:5px;
+  border-color: #f3f3f3;
 }
 .light-shades {
   color: #6B6B6B;
@@ -63,7 +71,7 @@ body {
   overflow-y:hidden; 
   /*background-color: #89EAC5;*/
 	/*background:#35CE94; #01C5BB;#F0F8FF;*/
-  border-left: 1px solid #89EAC5;
+  border-left: 1px solid #f3f3f3;
 }
 
 #heading {

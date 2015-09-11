@@ -38,7 +38,7 @@ var socket = io.connect(URL);
             })
         }else {
             $('#top_questions')
-            .append(' <p>Do vote the questions!<p>');      
+            .append('<p style="cursor:none">The 3 posts with most likes get featured here!<p>');      
         }    
     });
     socket.on('disconnect', function(){

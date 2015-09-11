@@ -2,7 +2,7 @@
 <html>   
 <head><title>Incognito</title>
 <meta charset="utf-8">
-<link rel="shortcut icon" href="/img/favicon.ico" />
+<link rel="shortcut icon" href="/images/incognito-favicon.png" />
 <link href="css/style.css" rel='stylesheet' type='text/css' />
 <link href="css/bubble.css" rel='stylesheet' type='text/css' />
 <link href="css/container.css" rel='stylesheet' type='text/css' />
@@ -34,21 +34,16 @@
             return n > 9 ? "" + n: "0" + n;
         };
         
-        function displayTime (timeDiff,element,text) {
-            timeDiff /= 1000;
+        function displayTime (total_seconds,element,text) {
+            var total_seconds = total_seconds /= 1000;
 
-            var seconds = Math.round(timeDiff % 60);
-            timeDiff = Math.floor(timeDiff / 60);
+            var h    = Math.floor(total_seconds / 3600);
+            var min  = Math.floor((total_seconds / 60) % 60);
+            var sec  = Math.floor(total_seconds % 60);
+            //var days = Math.floor(total_seconds / 24);
 
-            var minutes = Math.round(timeDiff % 60);
-            timeDiff = Math.floor(timeDiff / 60);
-
-            var hours = Math.round(timeDiff % 24);
-            timeDiff = Math.floor(timeDiff / 24);
-
-            var days = timeDiff;
             text = '<span class="light-shades">'+text +'</span>'
-            $(element).html(text + this.format(hours) + ":" + this.format(minutes) + ":" + this.format(seconds));
+            $(element).html(text + this.format(h) + ":" + this.format(min) + ":" + this.format(sec));
         }; 
         function elapsedisplay() {
             var current = new Date();
@@ -124,7 +119,8 @@
         Incognito = Initializer;
         Incognito.init();
         Helper = CoreUtil;
-            
+        
+        socket.emit('send_top_questions',minval);    
         setTimeout(elapsedisplay, 1000);
         setTimeout(remainingdisplay,1000);
         setInterval(function(){ 
@@ -207,7 +203,7 @@
                 <div class="main-wrap">
                     <div class="right-text"><br/>
                         <span class="title">Women @ Freshdesk</span></br/>
-                        <span class="light-shades">11 Sep 2015, 3:30PM - 5:30PM</span>
+                        <span class="light-shades">11 Sep,5:30 PM - 14 Sep,5:30 PM</span>
                     </div>
                     <div class="left-img">
                         <img class="small-logo" src="/images/incognito-logo.png"/>
@@ -219,14 +215,24 @@
                 </span>
                 <div class="justify">
                     <span class="light-shades">
-                Thanks for participating in our ‘Women @ Freshdesk’ event! <br/><br/>
-                We want to hear your feedback on the event, and ideas on how we can make this more useful for you in the future. Your identity will be completely anonymous, so you can discuss specific issues or concerns you may have, provide suggestions to others, ask for advice or generally vent to your fellow women!<br/><br/>
+                Thanks for participating in our ‘Women @ Freshdesk’ event! <br/>
+                We want to hear your feedback on the event, and ideas on how we can make this more useful for you in the future. Your identity will be completely anonymous, so you can discuss specific issues or concerns you may have, provide suggestions to others, ask for advice or generally vent to your fellow women!<br/>
                 As a first time experiment, we will have this open until Monday evening. If this is something useful, we will have this up and running more often!<br/>
                     </span>
-                </div>               
+                </div>  
+                <hr>
+     
+                <div id="info">
+                            <span class="light-shades">Moderator:</span> Monika Gunalan<br/>
+                            <div id="count"></div>
+                            <div class="elapsetime"></div>
+                            <div class="remainingtime"></div>
+                        </div>          
             <section class="ac-container">
-                <div>
-                    <input id="ac-1" name="accordion-1" type="radio" checked="">
+<!--                 <div>
+
+                    <input id="ac-1" name="accordion-1" type="checkbox" checked>
+                    
                     <label for="ac-1">Basic Information</label>
                     <article class="ac-small">
                         <br/>
@@ -238,7 +244,7 @@
                         </div>    
                     </article>
                 </div>
-<!--                 <div>
+ --><!--                 <div>
                     <input id="ac-3" name="accordion-1" type="radio">
                     <label for="ac-3">Agenda</label>
                     <article class="ac-medium">
@@ -253,11 +259,11 @@
                     </article>
                 </div> -->
                 <div>
-                    <input id="ac-2" name="accordion-1" type="radio">
+                    <input id="ac-2" name="accordion-1" type="checkbox" checked>
                     <label for="ac-2">Top Posts</label>
                     <article class="ac-large">
                           <div id="top_questions">
-                            <p>Do vote the questions!<p></div>
+                            <p style="cursor:none">The 3 posts with most likes get featured here!<p></div>
                     </article>
                 </div>
               
