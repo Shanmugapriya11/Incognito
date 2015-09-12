@@ -12,7 +12,7 @@
     z-index: 20;
     display: block;
     height: 25px;
-    /*cursor: pointer;*/
+    cursor: pointer;
     /*text-shadow: 1px 1px 1px rgba(255,255,255,0.8);*/
     line-height: 20px;
     /*font-size: 19px;*/
@@ -42,11 +42,11 @@
     text-align: left;
 }
 
-/*.ac-container label:hover {
+.ac-container label:hover {
     background: #fff;
 }
-*/
-/*.ac-container input:checked + label,.ac-container input:checked + label:hover {
+
+.ac-container input:checked + label,.ac-container input:checked + label:hover {
     font-family: 'Open Sans','Arial Narrow',Arial,sans-serif !important;
     background: #CCC;
     color: #FFF;
@@ -64,12 +64,12 @@
     height: 24px;
     right: 13px;
     top: 7px;
-    background: transparent url(../images/arrow_down.png) no-repeat center center;
+    background: transparent url(../images/refresh.png) no-repeat center center;
 }
 
 .ac-container input:checked + label:hover:after {
-    background-image: url(../images/arrow_up.png);
-}*/
+    background-image: url(../images/refresh.png);
+}
 
 .ac-container input {
     display: none;

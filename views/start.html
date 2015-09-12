@@ -11,11 +11,20 @@
 	<script src="js/utils.js"></script>
 
  <script type="text/javascript">
-	var timestamp = <%= timestamp %>;
-    $(function(){
-    	$('#end_msg')
-    	.append('It will start <small data-livestamp='+timestamp+'></small>')
+	$(function(){
+        startTime = new Date("<%= startTime %>");
+        endTime   = new Date("<%= endTime %>");
+            
+        var currentTime = new Date();
+        if(currentTime > startTime)
+            window.location.href = "/chat";
+        if(currentTime > endTime)
+            window.location.href = "/end";
 
+        var startEpoch   = startTime.getTime()/1000;
+        
+        $('#start_msg')
+    	.append('It will start <small data-livestamp='+startEpoch+'></small>');
     });	
 </script>
 </head>
@@ -32,7 +41,7 @@
             </div>
             <div class="leftcontent-wrap">
                 <div class="bubble bubble--dialog">
-                <div id="end_msg">
+                <div id="start_msg">
                 </div>
             </div>
             </div>

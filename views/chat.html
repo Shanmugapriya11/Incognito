@@ -26,91 +26,26 @@
 
     var maxval = Number.MIN_VALUE, minval = Number.MAX_VALUE;
     var unlock = true;
-    var userName,usertype,userID,imageNo,startTime,endTime,timediff,endEpoch,currentEpoch;
+    var userName,userID,imageNo,startTime,endTime,timediff,endEpoch,currentEpoch;
     var IMAGES_COUNT = 300;
     var Incognito = {},Helper = {};
         
-        function format(n){
-            return n > 9 ? "" + n: "0" + n;
-        };
-        
-        function displayTime (total_seconds,element,text) {
-            var total_seconds = total_seconds /= 1000;
-
-            var h    = Math.floor(total_seconds / 3600);
-            var min  = Math.floor((total_seconds / 60) % 60);
-            var sec  = Math.floor(total_seconds % 60);
-            //var days = Math.floor(total_seconds / 24);
-
-            text = '<span class="light-shades">'+text +'</span>'
-            $(element).html(text + this.format(h) + ":" + this.format(min) + ":" + this.format(sec));
-        }; 
-        function elapsedisplay() {
-            var current = new Date();
-            var timeDiff = current - startTime;
-            
-            displayTime(timeDiff,".elapsetime",'Elapsed Time: ');
-            setTimeout(elapsedisplay, 1000);
-        };
-        function remainingdisplay() {
-            var current = new Date();
-            var timeDiff = endTime - current;
-            
-            displayTime(timeDiff,".remainingtime",'Remaining Time: ');
-            setTimeout(remainingdisplay, 1000);
-        };
-        function generatingPDF() {
-            $.get('/generatingPDF',{},function(data){
-                if(userName != "anonymous_user"){
-            
-                        $("#admin-end-message").dialog({
-                            modal: true,
-                            draggable: false,
-                            resizable: false,
-                            show: 'blind',
-                            hide: 'blind',
-                            width: 600,
-                            height: 300,
-                            dialogClass: 'ui-dialog-osx',
-                            close: function(event, ui) { window.location.href = "/end"; },
-                            buttons: {
-                                "Save conversation as a .pdf": function() {
-                                     window.location.href = "/download";
-                                    },
-                                "Close": function() {
-                                    window.location.href = "/end";
-                                }
-                            }    
-                        });
-// $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
-                }else{
-                        $("#anonymous-end-message").dialog({
-                            modal: true,
-                            draggable: false,
-                            resizable: false,
-                            show: 'blind',
-                            hide: 'blind',
-                            width: 600,
-                            height: 300,
-                            dialogClass: 'ui-dialog-osx',
-                            close: function(event, ui) { window.location.href = "/end"; }
-                        });
-
-                    // $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
-                }
-
-                $("#conversation").unbind();
-            })
-        };
-
     jQuery(document).ready(function () {
+        startTime = new Date("<%= startTime %>");
+        endTime   = new Date("<%= endTime %>");      
+        var currentTime = new Date();
+      
+        if(currentTime < startTime)
+            window.location.href = "/start";
+        else if(currentTime > endTime)
+            window.location.href = "/end";
+
         userName  = "<%= userName %>";
         userID    = "<%= userID %>";
-        startTime = new Date("<%= startTime %>");
-        endTime   = new Date("<%= endTime %>");
         imageNo   = userID % IMAGES_COUNT;
         imageSrc  = "/images/profile_pictures/random/"+imageNo+".png"
         socket.emit('send_new_user',{userID: userID, userName: userName});
+        socket.emit('send_top_questions',minval);    
         
         endEpoch     = endTime.getTime();
         currentEpoch = Date.now();
@@ -118,20 +53,7 @@
 
         Incognito = Initializer;
         Incognito.init();
-        Helper = CoreUtil;
-        
-        socket.emit('send_top_questions',minval);    
-        setTimeout(elapsedisplay, 1000);
-        setTimeout(remainingdisplay,1000);
-        setInterval(function(){ 
-                socket.emit('send_top_questions',minval);
-            }, 300000);
-
-        setTimeout(function() {
-            $("#sendBox").hide();
-        },timediff);
-        
-        setTimeout(generatingPDF,timediff);
+        Helper    = CoreUtil;
     });
 
 </script>
@@ -262,8 +184,9 @@
                     <input id="ac-2" name="accordion-1" type="checkbox" checked>
                     <label for="ac-2">Top Posts</label>
                     <article class="ac-large">
-                          <div id="top_questions">
-                            <p style="cursor:none">The 3 posts with most likes get featured here!<p></div>
+                        <div id="top_questions">
+                            <p style="cursor:none">The 3 posts with most likes get featured here!<p>
+                        </div>
                     </article>
                 </div>
               
@@ -287,8 +210,9 @@
                         <span class="userName bold">You<br/></span>
 
                     </div>
-                     <textarea id="data" rows="5" cols="130" placeholder="Share your thoughts..."></textarea>
-                     <input type="button" id="datasend" value="Send" />
+                    <textarea id="data" rows="5" cols="130" placeholder="Share your thoughts...">
+                    </textarea>
+                     <input type="button" id="datasend" value="Send"/>
                 </div>     
             </div>
         </div>                               

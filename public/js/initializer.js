@@ -3,45 +3,33 @@ Initializer = (function () {
         format: function(n){
             return n > 9 ? "" + n: "0" + n;
         }, 
-        displayTime: function (timeDiff,element,text) {
-            timeDiff /= 1000;
+        displayTime: function(total_seconds,element,text) {
+            var total_seconds = total_seconds /= 1000;
 
-            var seconds = Math.round(timeDiff % 60);
-            timeDiff = Math.floor(timeDiff / 60);
+            var h    = Math.floor(total_seconds / 3600);
+            var min  = Math.floor((total_seconds / 60) % 60);
+            var sec  = Math.floor(total_seconds % 60);
+            //var days = Math.floor(total_seconds / 24);
 
-            var minutes = Math.round(timeDiff % 60);
-            timeDiff = Math.floor(timeDiff / 60);
-
-            var hours = Math.round(timeDiff % 24);
-            timeDiff = Math.floor(timeDiff / 24);
-
-            var days = timeDiff;
-            $(element).text(text + this.format(hours) + ":" + this.format(minutes) + ":" + this.format(seconds));
-        }, 
+            text = '<span class="light-shades">'+text +'</span>'
+            $(element).html(text + this.format(h) + ":" + this.format(min) + ":" + this.format(sec));
+        },
         elapsedisplay: function () {
             var current = new Date();
             var timeDiff = current - startTime;
-            
             _IG.displayTime(timeDiff,".elapsetime","Elapsed Time : ");
-            setTimeout(this.elapsedisplay, 1000);
         },
         remainingdisplay: function () {
             var current = new Date();
             var timeDiff = endTime - current;
-            
             _IG.displayTime(timeDiff,".remainingtime","Remaining Time : ");
-            setTimeout(this.remainingdisplay, 1000);
         }, 
         initialize: function() {
+            $('#data').focus();        
             $('.voting').hide();
             $('.like').hide();
-            $('#data').focus();        
             $('.smallSizeImg').attr('src', imageSrc);
-            //$('.userName').append(userName);
-            $('.userName').append('<span class="light-shades smallFont">(User '+userID+')</span>');
-            $('#anonymous_end_msg').html('Your voice has been heard <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
-            $('#admin_end_msg').html('Good Job! <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
-            
+            $('.userName').append('<span class="light-shades smallFont">(User '+userID+')</span>');            
             $("#dialog-message").dialog({
                 modal: true,
                 draggable: false,
@@ -54,15 +42,16 @@ Initializer = (function () {
                 buttons: {
                     "Got it!": function() {
                         $(this).dialog("close");
-                    },
-                    // "Disagree": function() {
-                    //     window.location.href = "/";
-                    // }
+                    }
                 }
             });
-            
-
-
+        },
+        load_post: function(){
+            if (minval != 1 && minval > 0 && minval != Number.MAX_VALUE && unlock){
+                unlock = false;
+                socket.emit('load_previous',minval);
+                minval = minval - 5;
+            }
         },
         bindEvents: function () {
             //attach the "wheel" event if it is supported, otherwise "mousewheel" event is used
@@ -75,14 +64,10 @@ Initializer = (function () {
                     scrollText = "";
 
                 if (deltaY < 0) {
-                    if (minval != 1 && minval > 0 && minval != Number.MAX_VALUE && unlock){
-                        unlock = false;
-                        socket.emit('load_previous',minval);
-                        minval = minval - 5;
-                    }
-                    else if(minval < 0 || minval == 1) {
-                        $("html").off("onwheel" in document.createElement("div") ? "wheel" : "mousewheel") 
-                    }
+                    _IG.load_post();
+                }
+                else if(minval < 0 || minval == 1) {
+                    $("html").off("onwheel" in document.createElement("div") ? "wheel" : "mousewheel") 
                 }
             });
         
@@ -137,6 +122,11 @@ Initializer = (function () {
             $("#top_questions")
             .on('click','.questions',function (e) {
                 var num = this.id.match(/\d+/)[0];
+                present = $('#list_'+num).length > 0
+                while(!present) {
+                    _IG.load_post();
+                    present = $('#list_'+num).length > 0
+                }
                 var container = $('#conversation'),scrollTo = $('#list_'+num);
                 container.animate({
                     scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
@@ -144,35 +134,24 @@ Initializer = (function () {
                 $("#list_"+num).fadeOut(1000).fadeIn(1000);
             });
         },
-        // initializeTimeout: function(){
-        //     setTimeout(this.elapsedisplay, 1000);
-        //     setTimeout(this.remainingdisplay,1000);
+        initializeTimeout: function(){
+            setInterval(this.elapsedisplay, 1000);
+            setInterval(this.remainingdisplay,1000);
 
-        //     setInterval(function(){ 
-        //         socket.emit('send_top_questions',minval);
-        //     }, 300000);
+            setInterval(function(){ 
+                socket.emit('send_top_questions',minval);
+            }, 300000);
 
-        //     setTimeout(function() {
-        //         $("#sendBox").hide();
-        //     },timediff);
-            
-        //     setTimeout(function() {
-        //         $.get('/generatingPDF',{},function(data){
-        //             if(userName != "anonymous_user"){
-        //                 $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/><input type='button' onclick=window.location.href='/download' value='Export Transcript'/></div>");
-        //             }else{
-        //                 $("#footer").append("<div id='sessionEnd'>This Session has ended!</br/></div>");
-        //             }
-
-        //             $("#conversation").unbind();
-        //         })
-        //     },timediff);
-        // }
+            setTimeout(function() {
+                $("#sendBox").hide();
+            },timediff);
+            setTimeout(Helper.event_over,timediff);
+        }
     };
     return {
         init: function () {
             _IG.initialize();
-            //_IG.initializeTimeout();
+            _IG.initializeTimeout();
             _IG.bindEvents();
         }
     };  

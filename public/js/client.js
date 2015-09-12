@@ -1,5 +1,36 @@
 var URL    = window.location.protocol + "//" + window.location.host;
+var max_socket_reconnects = 6;
 var socket = io.connect(URL);
+var connected = false;
+const RETRY_INTERVAL = 10000;
+var timeout;
+
+    var retryConnectOnFailure = function(retryInMilliseconds) {
+        setTimeout(function() {
+          if (!connected) {
+            $.get('/ping', function(data) {
+              connected = true;
+              window.location.href = unescape(window.location.pathname);
+            });
+            retryConnectOnFailure(retryInMilliseconds);
+          }
+        }, retryInMilliseconds);
+    };
+    
+    var reConnect = function(){
+        $("#sendBox").hide();
+        connected = false;
+        console.log('disconnected');
+        alert("<b>Disconnected! Trying to automatically to reconnect in " + RETRY_INTERVAL/1000 + " seconds.</b>");
+        retryConnectOnFailure(RETRY_INTERVAL);
+    };
+
+    socket.on('connect', function() {
+        connected = true;
+        clearTimeout(timeout);
+        $("#sendBox").show();
+        console.log("connected");
+    });
 
     socket.on('update_chat', function (data) {
         data = JSON.parse(data);
@@ -41,7 +72,16 @@ var socket = io.connect(URL);
             .append('<p style="cursor:none">The 3 posts with most likes get featured here!<p>');      
         }    
     });
-    socket.on('disconnect', function(){
+    
+    socket.on('event_over', function(){
         $("#sendBox").hide();
-        generatingPDF();
+        Helper.event_over();
+    });
+    
+    socket.on('disconnect', function(){
+        reConnect();
+    });
+
+    socket.on('connect_failed', function () {
+        reConnect();
     });

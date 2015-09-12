@@ -12,6 +12,20 @@ pool.getConnection(function(err, connection){
 })
 };
 
+var last_ids = function(callback){
+
+pool.getConnection(function(err, connection){
+  connection.query("SELECT max(id) as id, max(user_id) as user_id FROM message",  function(err, rows){
+    if(err) {
+      throw err;
+    }else{
+      callback(rows);
+    }
+  });
+  connection.release();
+})
+};
+
 var find_user = function(user){
 
 pool.getConnection(function(err, connection){
@@ -141,3 +155,4 @@ exports.load_first     = load_first
 exports.load_previous  = load_previous
 exports.top_questions  = top_questions
 exports.truncate_table = truncate_table
+exports.last_ids = last_ids

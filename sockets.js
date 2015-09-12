@@ -11,7 +11,6 @@ module.exports = {
                 qCount++;
                 id = socket.userID == null ? 1 : socket.userID;
                 name = socket.userName == null ? "anonymous_user" : socket.userName;
-
                 msg_details = { id: qCount, user_id: id , user_name: name, message: data, time: new Date(), upvote: 0};
                 db.insert(msg_details);
                 io.sockets.emit('update_chat',JSON.stringify(msg_details));
@@ -52,7 +51,7 @@ module.exports = {
 
             socket.on('disconnect', function(){
                 --noOfUsers;
-                noOfUsers = noOfUsers < 0 ? 1 : noOfUsers;
+                noOfUsers = noOfUsers <= 0 ? 1 : noOfUsers;
                 io.sockets.emit('update_users', noOfUsers);
             });
 

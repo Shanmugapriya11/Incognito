@@ -15,8 +15,8 @@ var express      = require('express'),
     global.uniqueIDs = 0;
     global.noOfUsers = 0;
     global.qCount    = 0;
-    global.startTime = new Date('09/11/2015  5:30:00 PM');
-    global.endTime   = new Date('09/14/2015  5:30:00 PM');
+    global.startTime = new Date('Fri, 11 Sep 2015 05:30:00 IST');
+    global.endTime   = new Date('Fri, 14 Sep 2015 05:30:00 IST');
 
     app.use(express.json());
     app.use(express.urlencoded());
@@ -37,6 +37,11 @@ var express      = require('express'),
 
     sockets.startSocketServer(server);
     routes(app);
+    db.last_ids(function(data) {
+        qCount    = data[0]['id'];
+        uniqueIDs = data[0]['user_id'];
+    });
+
     // db.truncate_table(function() {
     //     console.log("Truncated Table");
     // });
