@@ -73,11 +73,6 @@ var timeout;
         }    
     });
     
-    socket.on('event_over', function(){
-        $("#sendBox").hide();
-        Helper.event_over();
-    });
-    
     socket.on('disconnect', function(){
         reConnect();
     });

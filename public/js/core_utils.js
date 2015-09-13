@@ -52,6 +52,7 @@ CoreUtil = {
         .append('<li class="questions" id="ques_'+id+'">'+message+'...<br/><span class="light-shades">'+name+' - '+upvote+'<span></li><br/>');
     },        
     event_over: function() {
+        $("#sendBox").hide();
         if(userName != "anonymous_user"){
             $.get('/generatingPDF',{},function(data){
                 $('#admin_end_msg').html('Good Job! <br><br><small class="leftcommentDateStamp" data-livestamp="">Now</small>');
