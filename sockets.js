@@ -28,6 +28,7 @@ module.exports = {
             });
 
             socket.on('load_previous', function(last_id){
+                console.log("load_previous");
                 db.load_previous(last_id, function(result) {
                     socket.emit('update_old_chat',result); 
                 })

@@ -37,7 +37,7 @@ Initializer = (function () {
                 show: 'blind',
                 hide: 'blind',
                 width: 500,
-                height: 300,
+                height: 330,
                 dialogClass: 'ui-dialog-osx',
                 buttons: {
                     "Got it!": function() {
@@ -47,11 +47,13 @@ Initializer = (function () {
             });
         },
         load_post: function(){
+            console.log("load_post");
             if (minval != 1 && minval > 0 && minval != Number.MAX_VALUE && unlock){
                 unlock = false;
                 socket.emit('load_previous',minval);
                 minval = minval - 5;
             }
+            console.log(minval);
         },
         bindEvents: function () {
             //attach the "wheel" event if it is supported, otherwise "mousewheel" event is used
@@ -122,12 +124,18 @@ Initializer = (function () {
             $("#top_questions")
             .on('click','.questions',function (e) {
                 var num = this.id.match(/\d+/)[0];
-                present = $('#list_'+num).length > 0
-                while(!present) {
-                    _IG.load_post();
-                    present = $('#list_'+num).length > 0
+                var element = $('#list_'+num)
+                if ($(document).find(element).length == 0) 
+                { 
+                   _IG.load_post();// -- Not Exist
                 }
+                // while(!present) {
+                //     _IG.load_post();
+                //     check = $(document).find(element);
+                //     present = check.length > 0;
+                // }
                 var container = $('#conversation'),scrollTo = $('#list_'+num);
+                console.log(container);
                 container.animate({
                     scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
                 });
