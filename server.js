@@ -16,7 +16,7 @@ var express      = require('express'),
     global.noOfUsers = 0;
     global.qCount    = 0;
     global.startTime = new Date('11 Sep, 2015 05:30:00 GMT');
-    global.endTime   = new Date('14 Sep, 2015 12:30:00 GMT');
+    global.endTime   = new Date('15 Sep, 2015 12:30:00 GMT');
 
     app.use(express.json());
     app.use(express.urlencoded());
