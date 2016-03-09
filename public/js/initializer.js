@@ -45,6 +45,7 @@ Initializer = (function () {
                     }
                 }
             });
+            
         },
         load_post: function(){
             console.log("load_post");
