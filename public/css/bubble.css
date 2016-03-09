@@ -1,18 +1,18 @@
 .bubble {
   background: #FFF;/*#F0F8FF; /*#fefef0*/
-  box-shadow: inset 0 5px 5px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);
+  /*box-shadow: inset 0 5px 5px rgba(255, 255, 255, 0.4), 0 1px 3px rgba(0, 0, 0, 0.2);*/
   box-sizing: border-box;
   clear: both;
   float: left;
   margin: 5px 0 5px 20px;         
   display: inline-block;
   margin-bottom: 20px;
-  padding: 20px;
+  padding: 10px;
   position: relative;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.7);
   min-width: 20%;
   min-height: 60px;
-  max-width: 50%;
+  max-width: 80%;
   word-wrap: break-word;
   border: 1px solid #bbb;
   border-radius: 6px;
@@ -31,14 +31,14 @@
 .bubble:after {
 	border-color: rgba(224, 238, 224, 0);
 	border-right-color: #FFF;
-	border-width: 12px;
-	margin-top: -12px;
+	border-width: 9px;
+	margin-top: -9px;
 }
 .bubble:before {
 	border-color: rgba(187, 187, 187, 0);
 	border-right-color: #bbb;
-	border-width: 13px;
-	margin-top: -13px;
+	border-width: 10px;
+	margin-top: -10px;
 }
 
 .bubble:hover{
@@ -58,7 +58,7 @@
   margin: 5px 20px 5px 0; 
   min-width: 20%;
   min-height: 60px;
-  max-width: 50%;
+  max-width: 80%;
   border-radius: 6px;
 }
 .bubble--alt:after, .bubble--alt:before {
@@ -75,14 +75,14 @@
 .bubble--alt:after {
 	border-color: rgba(224, 238, 224, 0);
 	border-left-color: #E7F7F1;
-	border-width: 12px;
-	margin-top: -12px;
+	border-width: 9px;
+	margin-top: -9px;
 }
 .bubble--alt:before {
 	border-color: rgba(187, 187, 187, 0);
 	border-left-color: #bbb;
-	border-width: 13px;
-	margin-top: -13px;
+	border-width: 10px;
+	margin-top: -10px;
 }
 
 .bubble--alt:hover{
@@ -105,7 +105,7 @@
 	margin: 5px 0px 5px 20px;         
     min-width: 20%;
     min-height: 60px;
-    max-width: 50%;
+    max-width: 80%;
     border-radius: 6px;
 }
 
@@ -123,14 +123,14 @@
 .bubble--admin:after {
 	border-color: rgba(224, 238, 224, 0);
 	border-right-color: #F2F2F2;
-	border-width: 12px;
-	margin-top: -12px;
+	border-width: 9px;
+	margin-top: -9px;
 }
 .bubble--admin:before {
 	border-color: rgba(187, 187, 187, 0);
 	border-right-color: #bbb;
-	border-width: 13px;
-	margin-top: -13px;
+	border-width: 10px;
+	margin-top: -10px;
 }
 
 .bubble--admin:hover{
@@ -150,6 +150,7 @@
     min-height: 60px;
     max-width: 50%;
     border-radius: 6px;
+    font-size: 12px;
 }
 
 .bubble--dialog:after, .bubble--dialog:before {
@@ -166,12 +167,12 @@
 .bubble--dialog:after {
 	border-color: rgba(224, 238, 224, 0);
 	border-right-color: #FFF;
-	border-width: 12px;
-	margin-top: -12px;
+	border-width: 9px;
+	margin-top: -9px;
 }
 .bubble--dialog:before {
 	border-color: rgba(187, 187, 187, 0);
 	border-right-color: #bbb;
-	border-width: 13px;
-	margin-top: -13px;
+	border-width: 10px;
+	margin-top: -10px;
 }

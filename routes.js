@@ -5,10 +5,12 @@ var passport = require('passport'),
 require('./config/passport')(passport); // pass passport for configuration
 
 module.exports=function(app) {  
+
     app.use(passport.initialize());
     app.use(passport.session()); // persistent login sessions
     app.use(flash()); // use connect-flash for flash messages stored in session
-        
+    
+
     app.get('/', function (req, res) {
         res.render('index',{startTime: startTime, endTime: endTime });
     });
@@ -23,9 +25,10 @@ module.exports=function(app) {
 
     app.get('/chat', function (req, res) {
         ++noOfUsers;
-        ++uniqueIDs;
         name = req.user ? req.user.name : "anonymous_user";
-        res.render('chat',{ userName: name, userID: uniqueIDs,startTime: startTime, endTime: endTime });
+        console.log(req.session.userID);
+        req.session.userID = req.session.userID ? req.session.userID : ++uniqueIDs;
+        res.render('chat',{ userName: name, userID: req.session.userID, startTime: startTime, endTime: endTime });
     });
 
     app.get('/question', function (req, res) {

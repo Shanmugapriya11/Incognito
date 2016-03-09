@@ -150,7 +150,7 @@ h1 {
 }
 
 #conversation {
-  font-size: 13px;
+  font-size: 12px;
 	width: 100%; 
 	height: 87%; 
 	float: left;
@@ -217,7 +217,7 @@ a {
 .username {
   display: block;
 	text-align: center;
-	font-size: 14px;
+	font-size: 10px;
 }
 
 #data
@@ -251,7 +251,7 @@ input[type="button"],input[type="submit"]  {
 
 .leftsidebar {
     float: left;
-    width: 8%;
+    width: 5%;
     text-align: center;
 }
 
@@ -262,7 +262,7 @@ input[type="button"],input[type="submit"]  {
 
 .rightsidebar {
     float: right;
-    width: 8%;
+    width: 5%;
     text-align: center;
 }
 
@@ -274,8 +274,8 @@ input[type="button"],input[type="submit"]  {
 .clear {clear:both;}
 
 .smallprofileID {
-  width: 50px;
-  height: 50px;
+  width: 35px;
+  height: 35px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
@@ -298,11 +298,12 @@ input[type="button"],input[type="submit"]  {
 }
 
 .rightcommentDateStamp {
+  font-size: 10px;
 	opacity: 0.5;
   position:absolute;
   bottom:0;
   left:0;
-  padding: 20px;
+  padding: 10px;
 }
 
 .leftcommentDateStamp {
@@ -310,7 +311,7 @@ input[type="button"],input[type="submit"]  {
   position:absolute;
   bottom:0;
   right:0;
-  padding: 20px;
+  padding: 10px;
 }
 
 /* end of msg div */

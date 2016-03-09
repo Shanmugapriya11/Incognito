@@ -26,7 +26,7 @@ Initializer = (function () {
         }, 
         initialize: function() {
             $('#data').focus();        
-            $('.voting').hide();
+            // $('.voting').hide();
             $('.like').hide();
             $('.smallSizeImg').attr('src', imageSrc);
             $('.userName').append('<span class="light-shades smallFont">(User '+userID+')</span>');            
@@ -75,8 +75,8 @@ Initializer = (function () {
         
             $('#datasend').click( function() {
                 var message = $('#data').val();
-
-                if(message.length != 0){
+                console.log(message.length+"  print length");
+                if(message.length > 0){
                     $("div.someClass").text(message);
                     var escaped = $("<div>").text(message).html();
                     $('#data').val('');
